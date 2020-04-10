@@ -1,0 +1,159 @@
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-5">
+        <form class="form" action="" method="post">
+
+            <!--<span class="form__header form__header_elem">Кол-во ярусов</span>-->
+            <!--<div class="form__elem">-->
+            <!--    <div class="pk-radiobuttons">-->
+            <!--        <label class="form__label pk-radiobuttons__elem">-->
+            <!--            <input class="form__input pk-radiobuttons__input" type="radio" name="yarus" value="2" checked>-->
+            <!--            <span class="pk-radiobuttons__label pk-radiobuttons__label_first">Два</span>-->
+            <!--        </label>-->
+
+            <!--        <label class="form__label pk-radiobuttons__elem">-->
+            <!--            <input class="form__input pk-radiobuttons__input" type="radio" name="yarus" value="3">-->
+            <!--            <span class="pk-radiobuttons__label pk-radiobuttons__label_last">Три</span>-->
+            <!--        </label>-->
+            <!--    </div>-->
+            <!--</div>-->
+            
+            <span class="form__header form__header_elem">Толщина стали</span>
+            <div class="form__elem">
+                <div class="pk-radiobuttons">
+                    <label class="form__label pk-radiobuttons__elem">
+                        <input class="form__input pk-radiobuttons__input" type="radio" name="zhirik" value="1" checked="">
+                        <span class="pk-radiobuttons__label pk-radiobuttons__label_first">1&nbsp;мм</span>
+                    </label>
+
+                    <label class="form__label pk-radiobuttons__elem">
+                        <input class="form__input pk-radiobuttons__input" type="radio" name="zhirik" value="1,5">
+                        <span class="pk-radiobuttons__label">1,5&nbsp;мм</span>
+                    </label>
+
+                    <label class="form__label pk-radiobuttons__elem">
+                        <input class="form__input pk-radiobuttons__input" type="radio" name="zhirik" value="2">
+                        <span class="pk-radiobuttons__label">2&nbsp;мм</span>
+                    </label>
+
+                    <label class="form__label pk-radiobuttons__elem">
+                        <input class="form__input pk-radiobuttons__input" type="radio" name="zhirik" value="3">
+                        <span class="pk-radiobuttons__label pk-radiobuttons__label_last">3&nbsp;мм</span>
+                    </label>
+                </div>
+                <p class="form__caption">Чем толще стенки, тем долговечнее коптильня.<br>Также, от толщины зависит вид стали и наличие гидрозатвора.</p>
+            </div>
+
+            <span class="form__header form__header_elem">Марка стали</span>
+            <div class="form__elem">
+                <div class="pk-radiobuttons">
+                    <label class="form__label pk-radiobuttons__elem">
+                        <input class="form__input pk-radiobuttons__input" type="radio" name="marka" value="430" checked="">
+                        <span class="pk-radiobuttons__label pk-radiobuttons__label_first">AISI 430</span>
+                    </label>
+
+                    <label class="form__label pk-radiobuttons__elem">
+                        <input class="form__input pk-radiobuttons__input" type="radio" name="marka" value="304">
+                        <span class="pk-radiobuttons__label pk-radiobuttons__label_last">AISI 304</span>
+                    </label>
+                </div>
+                <p class="form__caption">AISI 430 — обычная, AISI 304 — немагнитная.</p>
+            </div>
+
+            <span class="form__header form__header_elem">Размер</span>
+            <label class="form__elem">
+                <div class="pk-select">
+                    <select class="form__select pk-select__select" name="size"><option value="1099" data-price="3680">350 × 200 × 200 мм</option><option value="1100" data-price="4000">400 × 200 × 200 мм</option><option value="1101" data-price="4480">400 × 250 × 200 мм</option><option value="1102" data-price="4800">400 × 300 × 200 мм</option><option value="1103" data-price="4800">450 × 250 × 200 мм</option></select>
+                    <img class="pk-select__arrow" src="/image/catalog/constructor/select-arrow.png" alt="↓">
+                </div>
+                <p class="form__caption">Длина × Ширина × Высота</p>
+            </label>
+
+            <span class="form__header form__header_elem">Аксессуары</span>
+            
+            <label class="form__elem">
+                <input type="checkbox" name="gidrozatvor" checked=""> Гидрозатвор
+            </label>
+            
+            <label class="form__elem form__elem_child">
+                <input type="checkbox" name="domik" data-price="500" value="1096"> Крышка домиком&nbsp;&nbsp;<span class="checkbox-price">+500₽</span>
+            </label>
+            
+            <label class="form__elem form__elem_child-2 form__elem_disabled">
+                <input type="checkbox" name="kryuchok" data-price="500" value="1098" disabled=""> Рейки с&nbsp;крючками для&nbsp;подвешивания продуктов&nbsp;&nbsp;<span class="checkbox-price">+500₽</span>
+            </label>
+            
+            <label class="form__elem">
+                <input type="checkbox" name="nozhki" data-price="700" value="1094"> Подставка (ножки)&nbsp;&nbsp;<span class="checkbox-price">+700₽</span>
+            </label>
+            
+            <label class="form__elem">
+                <input type="checkbox" name="datchik" data-price="700" value="1095"> Датчик температуры&nbsp;&nbsp;<span class="checkbox-price">+700₽</span>
+            </label>
+            
+            <label class="form__elem">
+                <input type="checkbox" name="shtutser" data-price="500" value="1097"> Штуцер для&nbsp;дымогенератора&nbsp;&nbsp;<span class="checkbox-price">+500₽</span>
+            </label>
+
+            <span class="form__header form__header_elem">2 кг щепы в подарок</span>
+            <div class="form__elem">
+                <div class="pk-radiobuttons">
+                    <label class="form__label pk-radiobuttons__elem">
+                        <input class="form__input pk-radiobuttons__input" type="radio" name="shchepa" value="1092" checked="">
+                        <span class="pk-radiobuttons__label pk-radiobuttons__label_first">Ольховая</span>
+                    </label>
+
+                    <label class="form__label pk-radiobuttons__elem">
+                        <input class="form__input pk-radiobuttons__input" type="radio" name="shchepa" value="1093">
+                        <span class="pk-radiobuttons__label pk-radiobuttons__label_last">Дубовая</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--<span class="form__header form__header_elem">Контактная информация</span>-->
+            <!--<div class="form__elem">-->
+            <!--    <label class="form__label">-->
+            <!--        Имя:<br>-->
+            <!--        <input class="form__input pk-text pk-text_name" type="text" placeholder="Иван Иванович Иванов">-->
+            <!--    </label>-->
+                
+            <!--    <label class="form__label">-->
+            <!--        Электронная почта:<br>-->
+            <!--        <input class="form__input pk-text pk-text_email" type="text" placeholder="ivanov@mail.ru">-->
+            <!--    </label>-->
+                
+            <!--    <label class="form__label">-->
+            <!--        Телефон:<br>-->
+            <!--        <input class="form__input pk-text pk-text_phone pk-text_last" type="text" placeholder="+7 123 456-78-90">-->
+            <!--    </label>-->
+            <!--</div>-->
+        </form>
+    </div>
+
+    <div id="sidebar" class="col-sm-12 col-md-6 col-lg-7">
+        <div class="sidebar__inner">
+            <div class="row">
+                <div class="col-sm-12 pk-checkout">
+                    <ul class="horizontal-list horizontal-list_constructor-head">
+                        <li class="horizontal-list__item horizontal-list__item_button">
+                            <button class="pk-button">В корзину</button>
+                        </li>
+
+                        <li class="horizontal-list__item horizontal-list__item_quantity">
+                            <input class="pk-quantity" value="1" min="1" max="9999" type="number">&nbsp;шт.
+                        </li>
+                        
+                        <li class="horizontal-list__item horizontal-list__item_price">
+                            <p class="pk-price"><span id="price">3 680</span> ₽</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pk-image">
+                <img id="kruk" class="img-responsive" src="" alt="Крючки для подвешивания продуктов" style="opacity: 0;">
+                <img id="picture" class="img-responsive" src="/image/catalog/constructor/states/10000.jpg" alt="10000">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://profkoptilnya.ru/catalog/view/javascript/constructor.js"></script>

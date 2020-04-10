@@ -1,0 +1,230 @@
+label {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+   opacity: 1;
+}
+
+.is-affixed img,
+.is-affixed .pk-price,
+.is-affixed .pk-button {
+    margin-left: 15px;
+}
+
+#sidebar {
+    margin-top: -50px;
+}
+
+@media (max-width: 991px) {
+    #sidebar {
+        margin-top: 35px;
+    }
+}
+
+#kruk {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkbox-price {
+    color: #555;
+    font-size: 13px;
+}
+
+.horizontal-list {
+    list-style-type: none;
+    padding: 0;
+}
+.horizontal-list_color .horizontal-list__item {
+    margin-right: 0;
+}
+.horizontal-list__item {
+    display: inline-block;
+    margin-right: 15px;
+}
+.horizontal-list__item:last-child {
+    margin-right: 0;
+}
+.horizontal-list__item_price {
+    font-size: 33px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+.horizontal-list__item_quantity {
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.pk-quantity {
+    width: 83px;
+    text-align: center;
+}
+
+.pk-checkout {
+    font-size: 33px;
+    font-weight: bold;
+}
+
+.pk-button {
+    font-size: 24px;
+    color: #fff;
+    padding: 11px 26px 13px;
+    background: linear-gradient(to bottom, #555, #000);
+    border-color: #333 #333 #000;
+    border-radius: 6px;
+    border-width: 1px;
+    position: relative;
+    top: -4px;
+}
+
+.pk-image {
+    margin-left: -15px;
+}
+
+.pk-price-item {
+    font-size: 18px;
+    line-height: 18px;
+    margin-left: 10px;
+}
+
+.form__input,
+.form__select {
+  padding: 5px 11px 7px;
+  font: inherit;
+}
+
+.form {
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.form__header {
+  margin-top: 17px;
+  margin-bottom: 5px;
+}
+
+.form__header_elem {
+  display: inline-block;
+  font-size: 21px;
+}
+
+.form__elem {
+  display: block;
+}
+
+.form__elem::after {
+  display: table;
+  content: "";
+  clear: both;
+}
+
+.form__elem_disabled {
+  color: #999;
+}
+
+.form__elem_child {
+  margin-left: 13px;
+}
+.form__elem_child-2 {
+  margin-left: 26px;
+}
+
+.form__label {
+    display: block;
+}
+
+.form__caption {
+  margin-bottom: 0;
+  font-size: 13px;
+  color: #666;
+}
+
+/* Уникальное текстовое поле */
+.pk-text {
+  margin-bottom: 10px;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+.pk-text_name,
+.pk-text_email {
+  width: 248px;
+}
+.pk-text_phone {
+  width: 152px;
+}
+.pk-text_last {
+  margin-bottom: 0;
+}
+/* ------ */
+
+/* Уникальный селект */
+.pk-select {
+    margin-bottom: 5px;
+}
+.pk-select__select {
+  width: 195px;
+  background-color: #f9f9f9;
+  border: 1px solid #999;
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -ms-appearance: none;
+  appearance: none !important;
+}
+.pk-select__arrow {
+  position: relative;
+  left: -27px;
+  top: -1px;
+}
+/* ------ */
+
+/* Уникальные радтокнопки */
+.pk-radiobuttons {
+    margin-bottom: 5px;
+}
+.pk-radiobuttons::after {
+  display: table;
+  content: "";
+  clear: both;
+}
+.pk-radiobuttons__elem {
+  float: left;
+  background-color: #f9f9f9;
+  margin-bottom: 0;
+}
+.pk-radiobuttons__input {
+  position: absolute;
+  z-index: -1;
+  margin-top: 4px;
+  margin-left: 4px;
+}
+.pk-radiobuttons__input:checked + .pk-radiobuttons__label {
+  background-color: #ffdcb3;
+  cursor: default;
+}
+.pk-radiobuttons__input:disabled + .pk-radiobuttons__label {
+  background-color: #fff;
+  color: #aaa;
+  cursor: default;
+}
+.pk-radiobuttons__label {
+  display: block;
+  padding: 5px 11px 7px;
+  border: 1px solid #999;
+  border-right: none;
+  cursor: pointer;
+}
+.pk-radiobuttons__label_first {
+  border-radius: 5px 0 0 5px;
+}
+.pk-radiobuttons__label_last {
+  border-right: 1px solid #999;
+  border-radius: 0 5px 5px 0;
+}
+/* ------ */
