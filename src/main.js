@@ -5,8 +5,10 @@ import { Provider } from 'react-redux';
 
 import rootReducer from './store/reducers';
 
+// Только для dev
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './profkoptilnya.css'
+import './profkoptilnya.css';
+
 import './main.scss';
 
 const store = createStore(rootReducer);
