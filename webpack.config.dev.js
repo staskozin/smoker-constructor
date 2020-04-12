@@ -1,12 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
+const baseConfig = require('./webpack.config.base.js');
 
-module.exports = {
-  entry: './src/main.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'constructor.js'
-  },
+module.exports = merge(baseConfig, {
+  mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
@@ -16,32 +14,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: "babel-loader"
-        }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          "style-loader",
-          "css-loader"
-        ]
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader"
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ["file-loader"]
-      },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
@@ -62,4 +34,4 @@ module.exports = {
       jQuery: "jquery"
     })
   ]
-};
+});
