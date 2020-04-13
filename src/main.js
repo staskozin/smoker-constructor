@@ -12,6 +12,7 @@ import rootReducer from './store/reducers';
 import './main.scss';
 
 import Info from './component/Info';
+import View from './component/View';
 
 const store = createStore(rootReducer);
 
@@ -24,6 +25,13 @@ ReactDOM.render(
         </div>
         <div className="col-md-6">
           <Info />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-sm-12 col-md-6 col-lg-5">
+        </div>
+        <div className="col-sm-12 col-md-6 col-lg-7">
+          <View />
         </div>
       </div>
     </div>
