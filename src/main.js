@@ -6,12 +6,13 @@ import { Provider } from 'react-redux';
 import rootReducer from './store/reducers';
 
 // Только для dev, перед билдом комментить
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import './profkoptilnya.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './profkoptilnya.css';
 
 import './main.scss';
 
 import Info from './component/Info';
+import FormContainer from './component/Form/FormContainer';
 import View from './component/View';
 
 const store = createStore(rootReducer);
@@ -29,6 +30,7 @@ ReactDOM.render(
       </div>
       <div className="row">
         <div className="col-sm-12 col-md-6 col-lg-5">
+          <FormContainer />
         </div>
         <div className="col-sm-12 col-md-6 col-lg-7">
           <View />
