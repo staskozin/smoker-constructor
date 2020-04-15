@@ -7,10 +7,6 @@ export default class Radio extends React.Component {
     super(props);
   }
 
-  change(value) {
-    this.props.change(value)
-  }
-
   renderRadio() {
     const { name, buttons } = this.props.data;
     return buttons.map(button => {
@@ -22,7 +18,7 @@ export default class Radio extends React.Component {
             value={button.value}
             name={name}
             checked={this.props.selected === button.value}
-            onChange={() => this.change(button.value)}
+            onChange={() => this.props.change(button.value)}
           />
           <span className={s.label}>{button.text}</span>
         </label>
