@@ -27,15 +27,10 @@ export default class Radio extends React.Component {
   }
 
   render() {
-    const { displayName, caption } = this.props.data;
     return (
-      <>
-        <span className={s.header}>{displayName}</span>
-        <div className={s.radiobuttons}>
-          {this.renderRadio()}
-        </div>
-        <p className={s.caption}>{caption}</p>
-      </>
+      <div className={s.radiobuttons}>
+        {this.renderRadio()}
+      </div>
     )
   }
 }
