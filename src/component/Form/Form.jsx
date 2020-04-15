@@ -22,6 +22,11 @@ export default class Form extends React.Component {
           selected={this.props.steel}
           change={this.props.changeSteel}
         />
+        <Radio
+          data={this.props.radio.chips}
+          selected={this.props.chips}
+          change={this.props.changeChips}
+        />
       </form>
     )
   }
