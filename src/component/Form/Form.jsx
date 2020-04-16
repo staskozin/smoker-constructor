@@ -3,6 +3,7 @@ import React from 'react';
 import s from './Form.scss';
 
 import Radio from './Radio';
+import Checkbox from './Checkbox';
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -27,6 +28,38 @@ export default class Form extends React.Component {
           change={this.props.changeSteel}
         />
         <p className={s.caption}>{this.props.radio.steel.caption}</p>
+
+        <span className={s.header}>Аксессуары</span>
+        <Checkbox
+          data={this.props.checkbox.waterlock}
+          selected={this.props.waterlock}
+          change={this.props.changeWaterlock}
+        />
+        <Checkbox
+          data={this.props.checkbox.cover}
+          selected={this.props.cover}
+          change={this.props.changeCover}
+        />
+        <Checkbox
+          data={this.props.checkbox.hooks}
+          selected={this.props.hooks}
+          change={this.props.changeHooks}
+        />
+        <Checkbox
+          data={this.props.checkbox.stand}
+          selected={this.props.stand}
+          change={this.props.changeStand}
+        />
+        <Checkbox
+          data={this.props.checkbox.thermometer}
+          selected={this.props.thermometer}
+          change={this.props.changeThermometer}
+        />
+        <Checkbox
+          data={this.props.checkbox.fitting}
+          selected={this.props.fitting}
+          change={this.props.changeFitting}
+        />
 
         <span className={s.header}>{this.props.radio.chips.displayName}</span>
         <Radio

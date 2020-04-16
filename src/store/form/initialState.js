@@ -683,15 +683,15 @@ export default {
     '300': []
   },
   thickness: 0,
-  waterlock: 1,
+  waterlock: true,
   steel: 1,
   size: 1099,
-  cover: 0,
-  hooks: 0,
-  stand: 0,
-  thermometer: 0,
-  fitting: 0,
   chips: 1092,
+  cover: false,
+  hooks: false,
+  stand: false,
+  thermometer: false,
+  fitting: false,
   radio: {
     thickness: {
       name: 'thickness',
@@ -738,13 +738,51 @@ export default {
       buttons: [
         {
           value: 1092,
-          text: 'AISI 430'
+          text: 'Ольховая'
         },
         {
           value: 1093,
-          text: 'AISI 304'
+          text: 'Дубовая'
         }
       ]
+    }
+  },
+  checkbox: {
+    waterlock: {
+      name: 'waterlock',
+      displayName: 'Гидрозатвор',
+      value: 0,
+      price: 0
+    },
+    cover: {
+      name: 'cover',
+      displayName: 'Крышка домиком',
+      value: 1096,
+      price: 500
+    },
+    hooks: {
+      name: 'hooks',
+      displayName: 'Рейки с крючками для подвешивания продуктов',
+      value: 1098,
+      price: 500
+    },
+    stand: {
+      name: 'stand',
+      displayName: 'Подставка (ножки)',
+      value: 1094,
+      price: 700
+    },
+    thermometer: {
+      name: 'thermometer',
+      displayName: 'Датчик температуры',
+      value: 1095,
+      price: 700
+    },
+    fitting: {
+      name: 'fitting',
+      displayName: 'Штуцер для дымогенератора',
+      value: 1097,
+      price: 500
     }
   }
 };
