@@ -6,30 +6,24 @@ import Form from './Form';
 import {
   changeThickness,
   changeSteel,
-  changeChips,
+  changeChips
+} from '../../store/form/radio/actions';
+
+import {
   changeWaterlock,
   changeCover,
   changeHooks,
   changeStand,
   changeThermometer,
   changeFitting
-} from '../../store/form/actions';
+} from '../../store/form/checkbox/actions';
 
 class FormContainer extends React.Component {
   render() {
     return (
       <Form
         radio={this.props.radio}
-        thickness={this.props.thickness}
-        steel={this.props.steel}
-        chips={this.props.chips}
         checkbox={this.props.checkbox}
-        waterlock={this.props.waterlock}
-        cover={this.props.cover}
-        hooks={this.props.hooks}
-        stand={this.props.stand}
-        thermometer={this.props.thermometer}
-        fitting={this.props.fitting}
         changeThickness={this.props.changeThickness}
         changeSteel={this.props.changeSteel}
         changeChips={this.props.changeChips}
@@ -47,16 +41,7 @@ class FormContainer extends React.Component {
 const putStateToProps = (state) => {
   return {
     radio: state.form.radio,
-    thickness: state.form.thickness,
-    steel: state.form.steel,
-    chips: state.form.chips,
-    checkbox: state.form.checkbox,
-    waterlock: state.form.waterlock,
-    cover: state.form.cover,
-    hooks: state.form.hooks,
-    stand: state.form.stand,
-    thermometer: state.form.thermometer,
-    fitting: state.form.fitting,
+    checkbox: state.form.checkbox
   }
 };
 
