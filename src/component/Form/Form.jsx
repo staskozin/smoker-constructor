@@ -39,11 +39,13 @@ export default class Form extends React.Component {
           data={this.props.checkbox.cover}
           selected={this.props.cover}
           change={this.props.changeCover}
+          nesting={1}
         />
         <Checkbox
           data={this.props.checkbox.hooks}
           selected={this.props.hooks}
           change={this.props.changeHooks}
+          nesting={2}
         />
         <Checkbox
           data={this.props.checkbox.stand}

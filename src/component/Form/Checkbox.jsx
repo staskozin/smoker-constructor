@@ -9,8 +9,9 @@ export default class Checkbox extends React.Component {
 
   render() {
     const { name, displayName, value } = this.props.data;
+    const nesting = this.props.nesting ? s[`child_${this.props.nesting}`] : '';
     return (
-      <label className={s.checkbox}>
+      <label className={`${s.checkbox} ${nesting}`}>
         <input
           type="checkbox"
           name={name}
