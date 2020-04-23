@@ -17,16 +17,28 @@ export default (state = initialState, action) => {
         waterlock: {
           ...state.waterlock,
           checked: !action.payload
+        },
+        cover: {
+          ...state.cover,
+          disabled: action.payload
+        },
+        hooks: {
+          ...state.hooks,
+          disabled: !state.cover.checked || !state.cover.disabled
         }
       };
     case FORM_CHANGE_COVER:
-    return {
-      ...state,
-      cover: {
-        ...state.cover,
-        checked: !action.payload
-      }
-    };
+      return {
+        ...state,
+        cover: {
+          ...state.cover,
+          checked: !action.payload
+        },
+        hooks: {
+          ...state.hooks,
+          disabled: action.payload
+        }
+      };
     case FORM_CHANGE_HOOKS:
       return {
         ...state,
@@ -35,30 +47,30 @@ export default (state = initialState, action) => {
           checked: !action.payload
         }
       };
-      case FORM_CHANGE_STAND:
-    return {
-      ...state,
-      stand: {
-        ...state.stand,
-        checked: !action.payload
-      }
-    };
+    case FORM_CHANGE_STAND:
+      return {
+        ...state,
+        stand: {
+          ...state.stand,
+          checked: !action.payload
+        }
+      };
     case FORM_CHANGE_THERMOMETER:
-    return {
-      ...state,
-      thermometer: {
-        ...state.thermometer,
-        checked: !action.payload
-      }
-    };
+      return {
+        ...state,
+        thermometer: {
+          ...state.thermometer,
+          checked: !action.payload
+        }
+      };
     case FORM_CHANGE_FITTING:
-    return {
-      ...state,
-      fitting: {
-        ...state.fitting,
-        checked: !action.payload
-      }
-    };
+      return {
+        ...state,
+        fitting: {
+          ...state.fitting,
+          checked: !action.payload
+        }
+      };
     default:
       return state;
   }

@@ -5,7 +5,8 @@ export default {
     value: 0,
     price: 0,
     checked: true,
-    nesting: 0
+    disabled: false,
+    nesting: 0,
   },
   cover: {
     name: 'cover',
@@ -13,6 +14,7 @@ export default {
     value: 1096,
     price: 500,
     checked: false,
+    disabled: false,
     nesting: 1
   },
   hooks: {
@@ -21,6 +23,7 @@ export default {
     value: 1098,
     price: 500,
     checked: false,
+    disabled: true,
     nesting: 2
   },
   stand: {
@@ -29,6 +32,7 @@ export default {
     value: 1094,
     price: 700,
     checked: false,
+    disabled: false,
     nesting: 0
   },
   thermometer: {
@@ -37,6 +41,7 @@ export default {
     value: 1095,
     price: 700,
     checked: false,
+    disabled: false,
     nesting: 0
   },
   fitting: {
@@ -45,6 +50,7 @@ export default {
     value: 1097,
     price: 500,
     checked: false,
+    disabled: false,
     nesting: 0
   }
 }

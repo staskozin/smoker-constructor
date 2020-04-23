@@ -8,7 +8,7 @@ export default class Checkbox extends React.Component {
   }
 
   render() {
-    const { name, displayName, value, checked, nesting } = this.props.data;
+    const { name, displayName, value, price, checked, disabled, nesting } = this.props.data;
     return (
       <label className={`${s.checkbox} ${nesting ? s[`child_${nesting}`] : ''}`}>
         <input
@@ -16,8 +16,9 @@ export default class Checkbox extends React.Component {
           name={name}
           value={value}
           checked={checked}
+          disabled={disabled}
           onChange={() => this.props.change(checked)}
-        /> {displayName}
+        /> <span>{displayName}</span> <span className={s.checkbox__price}>{price ? `+${price}₽` : ''}</span>
       </label>
     )
   }
