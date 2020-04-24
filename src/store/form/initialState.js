@@ -1,3 +1,6 @@
+import radio from './radio/initialState';
+import checkbox from './checkbox/initialState';
+
 export default {
   sizes: {
     '011': [
@@ -681,4 +684,6 @@ export default {
     '300': []
   },
   size: 1099,
+  radio: radio,
+  checkbox: checkbox
 };
