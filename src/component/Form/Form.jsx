@@ -3,6 +3,7 @@ import React from 'react';
 import s from './Form.scss';
 
 import Radio from './Radio';
+import Select from './Select';
 import Checkbox from './Checkbox';
 
 export default class Form extends React.Component {
@@ -26,6 +27,13 @@ export default class Form extends React.Component {
           change={this.props.changeSteel}
         />
         <p className={s.caption}>{this.props.radio.steel.caption}</p>
+
+        <span className={s.header}>Размер</span>
+        <Select
+          data={this.props.select}
+          change={this.props.changeSize}
+        />
+        <p className={s.caption}>Длина × Ширина × Высота</p>
 
         <span className={s.header}>Аксессуары</span>
         <Checkbox

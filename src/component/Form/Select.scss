@@ -1,0 +1,25 @@
+.wrap {
+  margin-bottom: 5px;
+
+  .select {
+    width: 195px;
+    background-color: #f9f9f9;
+    border: 1px solid #999;
+    border-radius: 5px;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    -ms-appearance: none;
+    appearance: none !important;
+    padding: 5px 11px 7px;
+    font-size: 16px;
+  }
+
+  .arrow {
+    position: relative;
+    left: -27px;
+    top: -1px;
+  }
+}

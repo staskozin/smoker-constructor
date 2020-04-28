@@ -10,6 +10,10 @@ import {
 } from '../../store/form/radio/actions';
 
 import {
+  changeSize
+} from '../../store/form/select/actions';
+
+import {
   changeWaterlock,
   changeCover,
   changeHooks,
@@ -23,10 +27,12 @@ class FormContainer extends React.Component {
     return (
       <Form
         radio={this.props.radio}
+        select={this.props.select}
         checkbox={this.props.checkbox}
         changeThickness={this.props.changeThickness}
         changeSteel={this.props.changeSteel}
         changeChips={this.props.changeChips}
+        changeSize={this.props.changeSize}
         changeWaterlock={this.props.changeWaterlock}
         changeCover={this.props.changeCover}
         changeHooks={this.props.changeHooks}
@@ -41,7 +47,8 @@ class FormContainer extends React.Component {
 const putStateToProps = (state) => {
   return {
     radio: state.form.radio,
-    checkbox: state.form.checkbox
+    checkbox: state.form.checkbox,
+    select: state.form.select
   }
 };
 
@@ -49,6 +56,7 @@ const putActionsToProps = {
   changeThickness,
   changeSteel,
   changeChips,
+  changeSize,
   changeWaterlock,
   changeCover,
   changeHooks,
