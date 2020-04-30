@@ -42,12 +42,12 @@ function getSmokerState(state) {
 
 function getImageState(smoker) {
   const { waterlock, cover, hooks, stand, thermometer, fitting } = smoker;
-  let hook, isHookHidden;
+  let hooksSrc, isHooksHidden;
   if (hooks.checked && !hooks.disabled) {
-    hook = stand.checked ? 'hook_high' : 'hook_low';
-    isHookHidden = false;
+    hooksSrc = stand.checked ? 'hook_high' : 'hook_low';
+    isHooksHidden = false;
   } else {
-    isHookHidden = true;
+    isHooksHidden = true;
   }
   let src = '';
   src += Number(waterlock.checked);
@@ -57,8 +57,8 @@ function getImageState(smoker) {
   src += Number(fitting.checked)
   return {
     img: {
-      hook: hook,
-      isHookHidden: isHookHidden,
+      hooksSrc: hooksSrc,
+      isHooksHidden: isHooksHidden,
       src: src
     }
   }

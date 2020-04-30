@@ -29,8 +29,8 @@ export default {
     checked: false
   },
   img: {
-    hook: '',
-    isHookHidden: true,
+    hooksSrc: '',
+    isHooksHidden: true,
     src: '10000'
   }
 }

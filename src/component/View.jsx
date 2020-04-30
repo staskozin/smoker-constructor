@@ -6,10 +6,10 @@ import s from './View.scss';
 function View(props) {
   return (
     <>
-      {!props.isHookHidden &&
+      {!props.isHooksHidden &&
         <img
           className={`${s.hook} img-responsive`}
-          src={`img/states/${props.hook}.png`}
+          src={`img/states/${props.hooksSrc}.png`}
           alt="Крючки для подвешивания продуктов"
         />
       }
@@ -20,8 +20,8 @@ function View(props) {
 
 const putStateToProps = state => {
   return {
-    hook: state.img.hook,
-    isHookHidden: state.img.isHookHidden,
+    hooksSrc: state.img.hooksSrc,
+    isHooksHidden: state.img.isHooksHidden,
     src: state.img.src
   };
 }
