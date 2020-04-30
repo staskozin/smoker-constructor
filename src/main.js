@@ -12,10 +12,10 @@ import './profkoptilnya.css';
 import './main.scss';
 
 import Info from './component/Info';
-import FormContainer from './component/Form/FormContainer';
+import Form from './component/Form/Form';
 import View from './component/View';
 
-const store = createStore(rootReducer);
+export const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -30,7 +30,7 @@ ReactDOM.render(
       </div>
       <div className="row">
         <div className="col-sm-12 col-md-6 col-lg-5">
-          <FormContainer />
+          <Form />
         </div>
         <div className="col-sm-12 col-md-6 col-lg-7">
           <View />
