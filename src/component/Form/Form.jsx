@@ -17,51 +17,8 @@ export default class Form extends React.Component {
     this.state = initialState;
   }
 
-  getSmokerState() {
-    const { radio, select, checkbox } = this.state;
-    let price = select.sizes[select.size.list].find(elem => elem.value === select.size.selected).price;
-    for (const key in checkbox) {
-      price += checkbox[key].checked ? checkbox[key].price : 0;
-    }
-    return {
-      price: price,
-      thickness: radio.thickness.checked,
-      steel: radio.steel.checked,
-      chips: radio.chips.checked,
-      size: select.size.selected,
-      waterlock: {
-        value: checkbox.waterlock.value,
-        checked: checkbox.waterlock.checked
-      },
-      cover: {
-        value: checkbox.cover.value,
-        checked: checkbox.cover.checked
-      },
-      hooks: {
-        value: checkbox.hooks.value,
-        checked: checkbox.hooks.checked
-      },
-      stand: {
-        value: checkbox.stand.value,
-        checked: checkbox.stand.checked
-      },
-      thermometer: {
-        value: checkbox.thermometer.value,
-        checked: checkbox.thermometer.checked
-      },
-      fitting: {
-        value: checkbox.fitting.value,
-        checked: checkbox.fitting.checked
-      }
-    }
-  }
-
-  componentDidMount() {
-    store.dispatch(updateSmoker(this.getSmokerState()))
-  }
-
   componentDidUpdate() {
-    store.dispatch(updateSmoker(this.getSmokerState()))
+    store.dispatch(updateSmoker(this.state))
   }
 
   changeThickness(value) {
