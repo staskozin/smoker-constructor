@@ -9,8 +9,11 @@ function Info(props) {
   const price = props.quantity == 1 || props.quantity === '' ? '' : <span className={s.price}>{formatPrice(props.price)}/шт.</span>;
   return (
     <ul className={s.info}>
-      <li className={`${s.info__item}`}>
-        <button className={s.button}>В корзину</button>
+      <li className={s.info__item}>
+        <button
+          className={s.button}
+          onClick={() => window.cart.add(314, Number(props.quantity), convertStateToRequestData(props))}
+        >В корзину</button>
       </li>
 
       <li className={`${s.info__item} ${s.info__item_quantity}`}>
@@ -42,6 +45,24 @@ function formatPrice(price) {
       res = String(price).charAt(i) + res;
     }
   return res + ' ₽';
+}
+
+function convertStateToRequestData(state) {
+  const { chips, size, cover, hooks, stand, thermometer, fitting } = state;
+  let data = '';
+  data += '&option[354]=' + chips;
+  data += '&option[356]=' + size;
+  if (cover.checked && !cover.disabled)
+    data += '&option[355][]=' + cover.value;
+  if (hooks.checked && !hooks.disabled)
+    data += '&option[355][]=' + hooks.value;
+  if (stand.checked)
+    data += '&option[355][]=' + stand.value;
+  if (thermometer.checked)
+    data += '&option[355][]=' + thermometer.value;
+  if (fitting.checked)
+    data += '&option[355][]=' + fitting.value;
+  return data;
 }
 
 const putStateToProps = state => {
