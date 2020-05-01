@@ -21,27 +21,76 @@ export default class Form extends React.Component {
     store.dispatch(updateSmoker(this.state))
   }
 
+  getSizeState(thickness, waterlock, steel) {
+    const list = '' + thickness + Number(waterlock) + steel;
+    return {
+      list: list,
+      selected: this.state.select.sizes[list][0].value
+    }
+  }
+
   changeThickness(value) {
+    let steel = this.state.radio.steel.checked;
+    let waterlock = this.state.checkbox.waterlock.checked;
+    const checkbox = this.state.checkbox;
+    if (value === 0 || value === 1) {
+      steel = 1;
+      waterlock = true;
+      checkbox.waterlock.checked = true;
+      checkbox.cover.disabled = false;
+      if (checkbox.cover.checked) {
+        checkbox.hooks.disabled = false;
+      }
+    }
     this.setState({
       radio: {
         ...this.state.radio,
         thickness: {
           ...this.state.radio.thickness,
           checked: value
+        },
+        steel: {
+          ...this.state.radio.steel,
+          checked: steel
         }
-      }
+      },
+      select: {
+        ...this.state.select,
+        size: this.getSizeState(value, waterlock, steel)
+      },
+      checkbox: checkbox
     })
   }
 
   changeSteel(value) {
+    const thickness = this.state.radio.thickness.checked === 0 || this.state.radio.thickness.checked === 1 ? 2 : this.state.radio.thickness.checked;
+    let waterlock = this.state.checkbox.waterlock.checked;
+    const checkbox = this.state.checkbox;
+    if (value === 0 && (this.state.radio.thickness.checked === 2 || this.state.radio.thickness.checked === 3)) {
+      waterlock = true;
+      checkbox.waterlock.checked = true;
+      checkbox.cover.disabled = false;
+      if (checkbox.cover.checked) {
+        checkbox.hooks.disabled = false;
+      }
+    }
     this.setState({
       radio: {
         ...this.state.radio,
+        thickness: {
+          ...this.state.radio.thickness,
+          checked: thickness
+        },
         steel: {
           ...this.state.radio.steel,
           checked: value
         }
-      }
+      },
+      select: {
+        ...this.state.select,
+        size: this.getSizeState(thickness, waterlock, value)
+      },
+      checkbox: checkbox
     })
   }
 
@@ -63,19 +112,37 @@ export default class Form extends React.Component {
         ...this.state.select,
         size: {
           ...this.state.select.size,
-          selected: value
+          selected: Number(value)
         }
       }
     })
   }
 
   changeWaterlock() {
+    const radio = this.state.radio;
+    const thickness = radio.thickness.checked === 0 || radio.thickness.checked === 1 ? 2 : radio.thickness.checked;
+    const steel = radio.steel.checked === 0 && (radio.thickness.checked === 2 || radio.thickness.checked === 3) ? 1 : radio.steel.checked;
+    radio.thickness.checked = thickness;
+    radio.steel.checked = steel;
     this.setState({
+      radio: radio,
+      select: {
+        ...this.state.select,
+        size: this.getSizeState(thickness, !this.state.checkbox.waterlock.checked, steel)
+      },
       checkbox: {
         ...this.state.checkbox,
         waterlock: {
           ...this.state.checkbox.waterlock,
           checked: !this.state.checkbox.waterlock.checked
+        },
+        cover: {
+          ...this.state.checkbox.cover,
+          disabled: this.state.checkbox.waterlock.checked
+        },
+        hooks: {
+          ...this.state.checkbox.hooks,
+          disabled: !this.state.checkbox.cover.checked || !this.state.checkbox.cover.disabled
         }
       }
     })
@@ -88,6 +155,10 @@ export default class Form extends React.Component {
         cover: {
           ...this.state.checkbox.cover,
           checked: !this.state.checkbox.cover.checked
+        },
+        hooks: {
+          ...this.state.checkbox.hooks,
+          disabled: this.state.checkbox.cover.checked
         }
       }
     })
