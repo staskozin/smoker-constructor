@@ -38,10 +38,16 @@
 
 .quantity {
   width: 83px;
+  height: 46px;
   text-align: center;
 
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     opacity: 1;
   }
+}
+
+.price {
+  font-size: 18px;
+  line-height: 18px;
 }

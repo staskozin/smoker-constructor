@@ -1,5 +1,7 @@
 export default {
   price: 3680,
+  quantity: 1,
+  total: 3680,
   chips: 1092,
   size: 1099,
   waterlock: {

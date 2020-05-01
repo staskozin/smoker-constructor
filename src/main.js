@@ -21,10 +21,10 @@ ReactDOM.render(
   <Provider store={store}>
     <div className="container">
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-sm-12 col-md-6 col-lg-5">
           <h1>Конструктор коптилен</h1>
         </div>
-        <div className="col-md-6">
+        <div className="col-sm-12 col-md-6 col-lg-7">
           <Info />
         </div>
       </div>

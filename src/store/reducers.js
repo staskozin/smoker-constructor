@@ -1,4 +1,4 @@
-import { UPDATE_SMOKER } from './actions';
+import { UPDATE_SMOKER, CHANGE_QUANTITY, BLUR_QUANTITY } from './actions';
 import initialState from './initialState';
 
 function getSmokerState(state) {
@@ -68,7 +68,35 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_SMOKER: {
       const smoker = getSmokerState(action.payload);
-      return Object.assign(smoker, getImageState(smoker));
+      return {
+        ...state,
+        ...smoker,
+        ...getImageState(smoker),
+        total: smoker.price * state.quantity
+      }
+    }
+    case CHANGE_QUANTITY: {
+      let quantity;
+      if (isNaN(Number(action.payload))) {
+        quantity = null;
+      }
+      else if (action.payload > 9999)
+        quantity = 9999;
+      else
+        quantity = action.payload;
+      return {
+        ...state,
+        quantity: quantity,
+        total: quantity < 1 ? state.price : state.price * quantity
+      };
+    }
+    case BLUR_QUANTITY: {
+      const quantity = action.payload < 1 ? 1 : action.payload;
+      return {
+        ...state,
+        quantity: quantity,
+        total: state.price * quantity
+      };
     }
     default:
       return state;
