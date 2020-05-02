@@ -5,7 +5,7 @@ function getSmokerState(state) {
   const { radio, select, checkbox } = state;
   let price = select.sizes[select.size.list].find(elem => elem.value === select.size.selected).price;
   for (const key in checkbox) {
-    price += checkbox[key].checked ? checkbox[key].price : 0;
+    price += checkbox[key].checked && !checkbox[key].disabled ? checkbox[key].price : 0;
   }
   return {
     price: price,
