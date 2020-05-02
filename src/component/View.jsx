@@ -9,11 +9,11 @@ function View(props) {
       {!props.isHooksHidden &&
         <img
           className={`${s.hook} img-responsive`}
-          src={`img/states/${props.hooksSrc}.png`}
+          src={`/_constructor/img/states/${props.hooksSrc}.png`}
           alt="Крючки для подвешивания продуктов"
         />
       }
-      <img className={`img-responsive`} src={`img/states/${props.src}.jpg`} alt={props.src} />
+      <img className={`img-responsive`} src={`/_constructor/img/states/${props.src}.jpg`} alt={props.src} />
     </>
   )
 }

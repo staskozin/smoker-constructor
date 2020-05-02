@@ -25,6 +25,17 @@ module.exports = merge(baseConfig, {
             }
           }
         ]
+      },
+      {
+        test: /(Select|View)\.(js|jsx)$/,
+        use: {
+          loader: 'string-replace-loader',
+          options: {
+            search: '/_constructor/img/',
+            replace: 'img/',
+            flags: 'g'
+          }
+        }
       }
     ]
   },
