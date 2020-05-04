@@ -2,10 +2,13 @@ export const UPDATE_SMOKER = 'UPDATE_SMOKER';
 export const CHANGE_QUANTITY = 'CHANGE_QUANTITY';
 export const BLUR_QUANTITY = 'BLUR_QUANTITY';
 
-export const updateSmoker = formState => {
+export const updateSmoker = (formState, price) => {
   return {
     type: UPDATE_SMOKER,
-    payload: formState
+    payload: {
+      formState,
+      price
+    }
   }
 }
 

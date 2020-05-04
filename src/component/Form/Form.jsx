@@ -2,212 +2,224 @@ import React from 'react';
 
 import { store } from '../../main';
 import { updateSmoker } from '../../store/actions';
-import initialState from './initialState';
 
 import s from './Form.scss';
 
-import Element from './Element';
-import Radio from './Radio';
-import Select from './Select';
-import Checkbox from './Checkbox';
+import Element from './Element/Element';
+
+import Radio from './Radio/Radio';
+import radioData from './Radio/data';
+
+import Select from './Select/Select';
+import selectData from './Select/data';
+
+import Checkbox from './Checkbox/Checkbox';
+import checkboxData from './Checkbox/data';
 
 export default class Form extends React.Component {
   constructor(props) {
     super(props)
-    this.state = initialState;
+    this.state = {
+      thickness: 0,
+      steel: 1,
+      chips: 1092,
+      size: 1099,
+      sizeList: '011',
+      waterlock: {
+        value: 0,
+        checked: true,
+        disabled: false
+      },
+      cover: {
+        value: 1096,
+        checked: false,
+        disabled: false
+      },
+      hooks: {
+        value: 1098,
+        checked: false,
+        disabled: true
+      },
+      stand: {
+        value: 1094,
+        checked: false,
+        disabled: false
+      },
+      thermometer: {
+        value: 1095,
+        checked: false,
+        disabled: false
+      },
+      fitting: {
+        value: 1097,
+        checked: false,
+        disabled: false
+      }
+    };
   }
 
   componentDidUpdate() {
-    store.dispatch(updateSmoker(this.state))
+    store.dispatch(updateSmoker(this.state, this.getPrice()))
   }
 
-  getSizeState(thickness, waterlock, steel) {
+  getPrice() {
+    let price = selectData[this.state.sizeList].find(elem => elem.value === this.state.size).price;
+    for (const key in checkboxData) {
+      price += this.state[key].checked && !this.state[key].disabled ? checkboxData[key].price : 0;
+    }
+    return price;
+  }
+
+  getSize(thickness, waterlock, steel) {
     const list = '' + thickness + Number(waterlock) + steel;
     return {
-      list: list,
-      selected: this.state.select.sizes[list][0].value
+      sizeList: list,
+      size: selectData[list][0].value
     }
   }
 
   changeThickness(value) {
-    let steel = this.state.radio.steel.checked;
-    let waterlock = this.state.checkbox.waterlock.checked;
-    const checkbox = this.state.checkbox;
+    let steel = this.state.steel;
+    let waterlockChecked = this.state.waterlock.checked;
+    let coverDisabled = this.state.cover.disabled;
+    let hooksDisabled = this.state.hooks.disabled;
     if (value === 0 || value === 1) {
       steel = 1;
-      waterlock = true;
-      checkbox.waterlock.checked = true;
-      checkbox.cover.disabled = false;
-      if (checkbox.cover.checked) {
-        checkbox.hooks.disabled = false;
+      waterlockChecked = true;
+      coverDisabled = false;
+      if (this.state.cover.checked) {
+        hooksDisabled = false;
       }
     }
     this.setState({
-      radio: {
-        ...this.state.radio,
-        thickness: {
-          ...this.state.radio.thickness,
-          checked: value
-        },
-        steel: {
-          ...this.state.radio.steel,
-          checked: steel
-        }
+      thickness: value,
+      steel: steel,
+      ...this.getSize(value, waterlockChecked, steel),
+      waterlock: {
+        ...this.state.waterlock,
+        checked: waterlockChecked
       },
-      select: {
-        ...this.state.select,
-        size: this.getSizeState(value, waterlock, steel)
+      cover: {
+        ...this.state.cover,
+        disabled: coverDisabled
       },
-      checkbox: checkbox
+      hooks: {
+        ...this.state.hooks,
+        disabled: hooksDisabled
+      }
     })
   }
 
   changeSteel(value) {
-    const thickness = this.state.radio.thickness.checked === 0 || this.state.radio.thickness.checked === 1 ? 2 : this.state.radio.thickness.checked;
-    let waterlock = this.state.checkbox.waterlock.checked;
-    const checkbox = this.state.checkbox;
-    if (value === 0 && (this.state.radio.thickness.checked === 2 || this.state.radio.thickness.checked === 3)) {
-      waterlock = true;
-      checkbox.waterlock.checked = true;
-      checkbox.cover.disabled = false;
-      if (checkbox.cover.checked) {
-        checkbox.hooks.disabled = false;
+    const thickness = this.state.thickness === 0 || this.state.thickness === 1 ? 2 : this.state.thickness;
+    let waterlockChecked = this.state.waterlock.checked;
+    let coverDisabled = this.state.cover.disabled;
+    let hooksDisabled = this.state.hooks.disabled;
+    if (value === 0 && (this.state.thickness === 2 || this.state.thickness === 3)) {
+      waterlockChecked = true;
+      coverDisabled = false;
+      if (this.state.cover.checked) {
+        hooksDisabled = false;
       }
     }
     this.setState({
-      radio: {
-        ...this.state.radio,
-        thickness: {
-          ...this.state.radio.thickness,
-          checked: thickness
-        },
-        steel: {
-          ...this.state.radio.steel,
-          checked: value
-        }
+      thickness: thickness,
+      steel: value,
+      ...this.getSize(thickness, waterlockChecked, value),
+      waterlock: {
+        ...this.state.waterlock,
+        checked: waterlockChecked
       },
-      select: {
-        ...this.state.select,
-        size: this.getSizeState(thickness, waterlock, value)
+      cover: {
+        ...this.state.cover,
+        disabled: coverDisabled
       },
-      checkbox: checkbox
+      hooks: {
+        ...this.state.hooks,
+        disabled: hooksDisabled
+      }
     })
   }
 
   changeChips(value) {
     this.setState({
-      radio: {
-        ...this.state.radio,
-        chips: {
-          ...this.state.radio.chips,
-          checked: value
-        }
-      }
+      chips: value
     })
   }
 
   changeSize(value) {
     this.setState({
-      select: {
-        ...this.state.select,
-        size: {
-          ...this.state.select.size,
-          selected: Number(value)
-        }
-      }
+      size: Number(value)
     })
   }
 
   changeWaterlock() {
-    const radio = this.state.radio;
-    const thickness = radio.thickness.checked === 0 || radio.thickness.checked === 1 ? 2 : radio.thickness.checked;
-    const steel = radio.steel.checked === 0 && (radio.thickness.checked === 2 || radio.thickness.checked === 3) ? 1 : radio.steel.checked;
-    radio.thickness.checked = thickness;
-    radio.steel.checked = steel;
+    const thickness = this.state.thickness === 0 || this.state.thickness === 1 ? 2 : this.state.thickness;
+    const steel = this.state.steel === 0 && (this.state.thickness === 2 || this.state.thickness === 3) ? 1 : this.state.steel;
     this.setState({
-      radio: radio,
-      select: {
-        ...this.state.select,
-        size: this.getSizeState(thickness, !this.state.checkbox.waterlock.checked, steel)
+      thickness: thickness,
+      steel: steel,
+      ...this.getSize(thickness, !this.state.waterlock.checked, steel),
+      waterlock: {
+        ...this.state.waterlock,
+        checked: !this.state.waterlock.checked
       },
-      checkbox: {
-        ...this.state.checkbox,
-        waterlock: {
-          ...this.state.checkbox.waterlock,
-          checked: !this.state.checkbox.waterlock.checked
-        },
-        cover: {
-          ...this.state.checkbox.cover,
-          disabled: this.state.checkbox.waterlock.checked
-        },
-        hooks: {
-          ...this.state.checkbox.hooks,
-          disabled: !this.state.checkbox.cover.checked || !this.state.checkbox.cover.disabled
-        }
+      cover: {
+        ...this.state.cover,
+        disabled: this.state.waterlock.checked
+      },
+      hooks: {
+        ...this.state.hooks,
+        disabled: !this.state.cover.checked || !this.state.cover.disabled
       }
     })
   }
 
   changeCover() {
     this.setState({
-      checkbox: {
-        ...this.state.checkbox,
-        cover: {
-          ...this.state.checkbox.cover,
-          checked: !this.state.checkbox.cover.checked
-        },
-        hooks: {
-          ...this.state.checkbox.hooks,
-          disabled: this.state.checkbox.cover.checked
-        }
+      cover: {
+        ...this.state.cover,
+        checked: !this.state.cover.checked
+      },
+      hooks: {
+        ...this.state.hooks,
+        disabled: this.state.cover.checked
       }
     })
   }
 
   changeHooks() {
     this.setState({
-      checkbox: {
-        ...this.state.checkbox,
-        hooks: {
-          ...this.state.checkbox.hooks,
-          checked: !this.state.checkbox.hooks.checked
-        }
+      hooks: {
+        ...this.state.hooks,
+        checked: !this.state.hooks.checked
       }
     })
   }
 
   changeStand() {
     this.setState({
-      checkbox: {
-        ...this.state.checkbox,
-        stand: {
-          ...this.state.checkbox.stand,
-          checked: !this.state.checkbox.stand.checked
-        }
+      stand: {
+        ...this.state.stand,
+        checked: !this.state.stand.checked
       }
     })
   }
 
   changeThermometer() {
     this.setState({
-      checkbox: {
-        ...this.state.checkbox,
-        thermometer: {
-          ...this.state.checkbox.thermometer,
-          checked: !this.state.checkbox.thermometer.checked
-        }
+      thermometer: {
+        ...this.state.thermometer,
+        checked: !this.state.thermometer.checked
       }
     })
   }
 
   changeFitting() {
     this.setState({
-      checkbox: {
-        ...this.state.checkbox,
-        fitting: {
-          ...this.state.checkbox.fitting,
-          checked: !this.state.checkbox.fitting.checked
-        }
+      fitting: {
+        ...this.state.fitting,
+        checked: !this.state.fitting.checked
       }
     })
   }
@@ -216,39 +228,73 @@ export default class Form extends React.Component {
     return (
       <form className={s.form}>
         <Element
-          header={this.state.radio.thickness.displayName}
-          caption={this.state.radio.thickness.caption}
-          inputs={<Radio data={this.state.radio.thickness} change={this.changeThickness.bind(this)} />}
+          header={radioData.thickness.displayName}
+          caption={radioData.thickness.caption}
+          inputs={<Radio data={radioData.thickness} selected={this.state.thickness} change={this.changeThickness.bind(this)} />}
         />
 
         <Element
-          header={this.state.radio.steel.displayName}
-          caption={this.state.radio.steel.caption}
-          inputs={<Radio data={this.state.radio.steel} change={this.changeSteel.bind(this)} />}
+          header={radioData.steel.displayName}
+          caption={radioData.steel.caption}
+          inputs={<Radio data={radioData.steel} selected={this.state.steel} change={this.changeSteel.bind(this)} />}
         />
 
         <Element
           header="Размер"
           caption="Длина × Ширина × Высота"
-          inputs={<Select data={this.state.select} change={this.changeSize.bind(this)} />}
+          inputs={<Select
+            data={selectData}
+            selectedList={this.state.sizeList}
+            selected={this.state.size}
+            change={this.changeSize.bind(this)}
+          />}
         />
 
         <Element
           header="Аксессуары"
           inputs={[
-            <Checkbox data={this.state.checkbox.waterlock} change={this.changeWaterlock.bind(this)} key={this.state.checkbox.waterlock.value} />,
-            <Checkbox data={this.state.checkbox.cover} change={this.changeCover.bind(this)} key={this.state.checkbox.cover.value} />,
-            <Checkbox data={this.state.checkbox.hooks} change={this.changeHooks.bind(this)} key={this.state.checkbox.hooks.value} />,
-            <Checkbox data={this.state.checkbox.stand} change={this.changeStand.bind(this)} key={this.state.checkbox.stand.value} />,
-            <Checkbox data={this.state.checkbox.thermometer} change={this.changeThermometer.bind(this)} key={this.state.checkbox.thermometer.value} />,
-            <Checkbox data={this.state.checkbox.fitting} change={this.changeFitting.bind(this)} key={this.state.checkbox.fitting.value} />
+            <Checkbox
+              data={checkboxData.waterlock}
+              selected={this.state.waterlock}
+              change={this.changeWaterlock.bind(this)}
+              key={this.state.waterlock.value}
+            />,
+            <Checkbox
+              data={checkboxData.cover}
+              selected={this.state.cover}
+              change={this.changeCover.bind(this)}
+              key={this.state.cover.value}
+            />,
+            <Checkbox
+              data={checkboxData.hooks}
+              selected={this.state.hooks}
+              change={this.changeHooks.bind(this)}
+              key={this.state.hooks.value}
+            />,
+            <Checkbox
+              data={checkboxData.stand}
+              selected={this.state.stand}
+              change={this.changeStand.bind(this)}
+              key={this.state.stand.value}
+            />,
+            <Checkbox
+              data={checkboxData.thermometer}
+              selected={this.state.thermometer}
+              change={this.changeThermometer.bind(this)}
+              key={this.state.thermometer.value} />,
+            <Checkbox
+              data={checkboxData.fitting}
+              selected={this.state.fitting}
+              change={this.changeFitting.bind(this)}
+              key={this.state.fitting.value}
+            />
           ]}
         />
 
         <Element
-          header={this.state.radio.chips.displayName}
-          caption={this.state.radio.chips.caption}
-          inputs={<Radio data={this.state.radio.chips} change={this.changeChips.bind(this)} />}
+          header={radioData.chips.displayName}
+          caption={radioData.chips.caption}
+          inputs={<Radio data={radioData.chips} selected={this.state.chips} change={this.changeChips.bind(this)} />}
         />
       </form>
     )

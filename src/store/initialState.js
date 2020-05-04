@@ -1,7 +1,6 @@
 export default {
-  price: 3680,
-  quantity: 1,
-  total: 3680,
+  thickness: 0,
+  steel: 1,
   chips: 1092,
   size: 1099,
   waterlock: {
@@ -30,6 +29,9 @@ export default {
     value: 1097,
     checked: false
   },
+  price: 3680,
+  quantity: 1,
+  total: 3680,
   img: {
     hooksSrc: '',
     isHooksHidden: true,

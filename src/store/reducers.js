@@ -1,47 +1,13 @@
-import { UPDATE_SMOKER, CHANGE_QUANTITY, BLUR_QUANTITY } from './actions';
+import {
+  UPDATE_SMOKER,
+  CHANGE_QUANTITY,
+  BLUR_QUANTITY
+} from './actions';
 import initialState from './initialState';
 
-function getSmokerState(state) {
-  const { radio, select, checkbox } = state;
-  let price = select.sizes[select.size.list].find(elem => elem.value === select.size.selected).price;
-  for (const key in checkbox) {
-    price += checkbox[key].checked && !checkbox[key].disabled ? checkbox[key].price : 0;
-  }
-  return {
-    price: price,
-    chips: radio.chips.checked,
-    size: select.size.selected,
-    waterlock: {
-      value: checkbox.waterlock.value,
-      checked: checkbox.waterlock.checked
-    },
-    cover: {
-      value: checkbox.cover.value,
-      checked: checkbox.cover.checked,
-      disabled: checkbox.cover.disabled
-    },
-    hooks: {
-      value: checkbox.hooks.value,
-      checked: checkbox.hooks.checked,
-      disabled: checkbox.hooks.disabled
-    },
-    stand: {
-      value: checkbox.stand.value,
-      checked: checkbox.stand.checked
-    },
-    thermometer: {
-      value: checkbox.thermometer.value,
-      checked: checkbox.thermometer.checked
-    },
-    fitting: {
-      value: checkbox.fitting.value,
-      checked: checkbox.fitting.checked
-    }
-  }
-}
 
-function getImageState(smoker) {
-  const { waterlock, cover, hooks, stand, thermometer, fitting } = smoker;
+function getImageState(checkboxes) {
+  const { waterlock, cover, hooks, stand, thermometer, fitting } = checkboxes;
   let hooksSrc, isHooksHidden;
   if (hooks.checked && !hooks.disabled) {
     hooksSrc = stand.checked ? 'hook_high' : 'hook_low';
@@ -67,12 +33,13 @@ function getImageState(smoker) {
 export default (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_SMOKER: {
-      const smoker = getSmokerState(action.payload);
+      const { formState, price } = action.payload;
       return {
         ...state,
-        ...smoker,
-        ...getImageState(smoker),
-        total: smoker.price * state.quantity
+        ...formState,
+        ...getImageState(formState),
+        price: price,
+        total: price * state.quantity
       }
     }
     case CHANGE_QUANTITY: {

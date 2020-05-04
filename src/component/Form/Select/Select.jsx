@@ -3,13 +3,13 @@ import React from 'react';
 import s from './Select.scss';
 
 export default function Select(props) {
-  const { sizes, size } = props.data;
-  const list = sizes[size.list];
+  const sizes = props.data;
+  const list = sizes[props.selectedList];
   return (
     <div className={s.wrap}>
       <select
         className={s.select}
-        value={props.data.size.selected}
+        value={props.selected}
         name="size"
         onChange={(e) => props.change(e.target.value)}
       >
@@ -27,4 +27,3 @@ export default function Select(props) {
     </div>
   )
 }
- 

@@ -3,7 +3,7 @@ import React from 'react';
 import s from './Radio.scss';
 
 export default function Radio(props) {
-  const { name, buttons, checked } = props.data;
+  const { name, buttons } = props.data;
   return (
     <div className={s.radiobuttons}>
       {
@@ -15,7 +15,7 @@ export default function Radio(props) {
                 type="radio"
                 value={button.value}
                 name={name}
-                checked={checked === button.value}
+                checked={props.selected === button.value}
                 onChange={() => props.change(button.value)}
               />
               <span className={s.label}>{button.text}</span>
