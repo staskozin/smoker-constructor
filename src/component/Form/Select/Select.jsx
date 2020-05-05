@@ -23,7 +23,7 @@ export default function Select(props) {
           })
         }
       </select>
-      <img className={s.arrow} src="/_constructor/img/select-arrow.png" alt="↓" />
+      <img className={s.arrow} src="/_constructor/img/select-arrow.png" alt="&#8595;" />
     </div>
   )
 }
