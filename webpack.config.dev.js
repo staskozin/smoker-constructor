@@ -36,6 +36,17 @@ module.exports = merge(baseConfig, {
             flags: 'g'
           }
         }
+      },
+      {
+        test: /main\.(js|jsx)$/,
+        use: {
+          loader: 'string-replace-loader',
+          options: {
+            search: "import './main.scss';",
+            replace: "import 'bootstrap/dist/css/bootstrap.min.css';import './profkoptilnya.css';import './main.scss';",
+            flags: 'g'
+          }
+        }
       }
     ]
   },

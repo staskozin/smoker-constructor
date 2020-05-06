@@ -5,10 +5,6 @@ import { Provider } from 'react-redux';
 
 import rootReducer from './store/reducers';
 
-// Только для dev, перед билдом комментить
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './profkoptilnya.css';
-
 import './main.scss';
 
 import Info from './component/Info';
