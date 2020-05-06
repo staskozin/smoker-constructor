@@ -1,10 +1,29 @@
 import {
-  UPDATE_SMOKER,
   CHANGE_QUANTITY,
-  BLUR_QUANTITY
+  BLUR_QUANTITY,
+  CHANGE_THICKNESS,
+  CHANGE_STEEL,
+  CHANGE_CHIPS,
+  CHANGE_SIZE,
+  CHANGE_WATERLOCK,
+  CHANGE_COVER,
+  CHANGE_HOOKS,
+  CHANGE_STAND,
+  CHANGE_THERMOMETER,
+  CHANGE_FITTING
 } from './actions';
 import initialState from './initialState';
 
+import selectData from '../component/Form/Select/data';
+import checkboxData from '../component/Form/Checkbox/data';
+
+function getSizeState(thickness, waterlock, steel) {
+  const list = '' + thickness + Number(waterlock) + steel;
+  return {
+    sizeList: list,
+    size: selectData[list][0].value
+  }
+}
 
 function getImageState(checkboxes) {
   const { waterlock, cover, hooks, stand, thermometer, fitting } = checkboxes;
@@ -30,18 +49,19 @@ function getImageState(checkboxes) {
   }
 }
 
+function getPrice(state) {
+  let price = selectData[state.sizeList].find(elem => elem.value === state.size).price;
+  for (const key in checkboxData) {
+    price += state[key].checked && !state[key].disabled ? checkboxData[key].price : 0;
+  }
+  return {
+    price,
+    total: state.quantity < 1 ? price : price * state.quantity
+  };
+}
+
 export default (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_SMOKER: {
-      const { formState, price } = action.payload;
-      return {
-        ...state,
-        ...formState,
-        ...getImageState(formState),
-        price: price,
-        total: price * state.quantity
-      }
-    }
     case CHANGE_QUANTITY: {
       let quantity;
       if (isNaN(Number(action.payload))) {
@@ -64,6 +84,193 @@ export default (state = initialState, action) => {
         quantity: quantity,
         total: state.price * quantity
       };
+    }
+    case CHANGE_THICKNESS: {
+      let steel = state.steel;
+      let waterlockChecked = state.waterlock.checked;
+      let coverDisabled = state.cover.disabled;
+      let hooksDisabled = state.hooks.disabled;
+      if (action.payload === 0 || action.payload === 1) {
+        steel = 1;
+        waterlockChecked = true;
+        coverDisabled = false;
+        if (state.cover.checked) {
+          hooksDisabled = false;
+        }
+      }
+      const newState = {
+        ...state,
+        thickness: action.payload,
+        steel: steel,
+        ...getSizeState(action.payload, waterlockChecked, steel),
+        waterlock: {
+          ...state.waterlock,
+          checked: waterlockChecked
+        },
+        cover: {
+          ...state.cover,
+          disabled: coverDisabled
+        },
+        hooks: {
+          ...state.hooks,
+          disabled: hooksDisabled
+        }
+      }
+      return {
+        ...newState,
+        ...getImageState(newState)
+      }
+    }
+    case CHANGE_STEEL: {
+      const thickness = state.thickness === 0 || state.thickness === 1 ? 2 : state.thickness;
+      let waterlockChecked = state.waterlock.checked;
+      let coverDisabled = state.cover.disabled;
+      let hooksDisabled = state.hooks.disabled;
+      if (action.payload === 0 && (state.thickness === 2 || state.thickness === 3)) {
+        waterlockChecked = true;
+        coverDisabled = false;
+        if (state.cover.checked) {
+          hooksDisabled = false;
+        }
+      }
+      const newState = {
+        ...state,
+        thickness: thickness,
+        steel: action.payload,
+        ...getSizeState(thickness, waterlockChecked, action.payload),
+        waterlock: {
+          ...state.waterlock,
+          checked: waterlockChecked
+        },
+        cover: {
+          ...state.cover,
+          disabled: coverDisabled
+        },
+        hooks: {
+          ...state.hooks,
+          disabled: hooksDisabled
+        }
+      }
+      return {
+        ...newState,
+        ...getImageState(newState)
+      }
+    }
+    case CHANGE_CHIPS: {
+      return {
+        ...state,
+        chips: action.payload
+      }
+    }
+    case CHANGE_SIZE: {
+      const newState = {
+        ...state,
+        size: Number(action.payload)
+      }
+      return {
+        ...newState,
+        ...getPrice(newState)
+      }
+    }
+    case CHANGE_WATERLOCK: {
+      const thickness = state.thickness === 0 || state.thickness === 1 ? 2 : state.thickness;
+      const steel = state.steel === 0 && (state.thickness === 2 || state.thickness === 3) ? 1 : state.steel;
+      const newState = {
+        ...state,
+        thickness: thickness,
+        steel: steel,
+        ...getSizeState(thickness, !state.waterlock.checked, steel),
+        waterlock: {
+          ...state.waterlock,
+          checked: !state.waterlock.checked
+        },
+        cover: {
+          ...state.cover,
+          disabled: state.waterlock.checked
+        },
+        hooks: {
+          ...state.hooks,
+          disabled: !state.cover.checked || !state.cover.disabled
+        }
+      }
+      return {
+        ...newState,
+        ...getImageState(newState)
+      }
+    }
+    case CHANGE_COVER: {
+      const newState = {
+        ...state,
+        cover: {
+          ...state.cover,
+          checked: !state.cover.checked
+        },
+        hooks: {
+          ...state.hooks,
+          disabled: state.cover.checked
+        }
+      }
+      return {
+        ...newState,
+        ...getImageState(newState),
+        ...getPrice(newState)
+      }
+    }
+    case CHANGE_HOOKS: {
+      const newState = {
+        ...state,
+        hooks: {
+          ...state.hooks,
+          checked: !state.hooks.checked
+        }
+      }
+      return {
+        ...newState,
+        ...getImageState(newState),
+        ...getPrice(newState)
+      }
+    }
+    case CHANGE_STAND: {
+      const newState = {
+        ...state,
+        stand: {
+          ...state.stand,
+          checked: !state.stand.checked
+        }
+      }
+      return {
+        ...newState,
+        ...getImageState(newState),
+        ...getPrice(newState)
+      }
+    }
+    case CHANGE_THERMOMETER: {
+      const newState = {
+        ...state,
+        thermometer: {
+          ...state.thermometer,
+          checked: !state.thermometer.checked
+        }
+      }
+      return {
+        ...newState,
+        ...getImageState(newState),
+        ...getPrice(newState)
+      }
+    }
+    case CHANGE_FITTING: {
+      const newState = {
+        ...state,
+        fitting: {
+          ...state.fitting,
+          checked: !state.fitting.checked
+        }
+      }
+      return {
+        ...newState,
+        ...getImageState(newState),
+        ...getPrice(newState)
+      }
     }
     default:
       return state;
