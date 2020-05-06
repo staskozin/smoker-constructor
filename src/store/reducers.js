@@ -118,7 +118,8 @@ export default (state = initialState, action) => {
       }
       return {
         ...newState,
-        ...getImageState(newState)
+        ...getImageState(newState),
+        ...getPrice(newState)
       }
     }
     case CHANGE_STEEL: {
@@ -153,7 +154,8 @@ export default (state = initialState, action) => {
       }
       return {
         ...newState,
-        ...getImageState(newState)
+        ...getImageState(newState),
+        ...getPrice(newState)
       }
     }
     case CHANGE_CHIPS: {
@@ -195,7 +197,8 @@ export default (state = initialState, action) => {
       }
       return {
         ...newState,
-        ...getImageState(newState)
+        ...getImageState(newState),
+        ...getPrice(newState)
       }
     }
     case CHANGE_COVER: {
