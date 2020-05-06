@@ -15,7 +15,10 @@ import Info from './component/Info';
 import FormContainer from './component/Form/FormContainer';
 import View from './component/View';
 
-export const store = createStore(rootReducer);
+import { loadState, saveState } from './store/localStorage';
+
+export const store = createStore(rootReducer, loadState());
+store.subscribe(() => saveState(store.getState()));
 
 ReactDOM.render(
   <Provider store={store}>
