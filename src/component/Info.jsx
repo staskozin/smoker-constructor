@@ -6,7 +6,7 @@ import { changeQuantity, blurQuantity } from '../store/actions';
 import s from './Info.scss';
 
 function Info(props) {
-  const price = props.quantity == 1 || props.quantity === '' ? '' : <span className={s.price}>{formatPrice(props.price)}/шт.</span>;
+  const price = props.quantity == 1 || props.quantity == 0 || props.quantity === '' ? '' : <span className={s.price}>{formatPrice(props.price)}/шт.</span>;
   return (
     <ul className={s.info}>
       <li className={s.info__item}>
