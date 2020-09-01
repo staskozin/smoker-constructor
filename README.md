@@ -4,7 +4,7 @@
 [Посмотреть на сайте](https://profkoptilnya.ru/constructor)
 
 Встраивается в OpenCart.\
-Написан на React + Redux. Сборка через Webpack.
+Написан на React + Redux. Сборка через Webpack. Стили на SASS.
 
 ![Конструктор коптилен](./static/img/constructor.png)
 
